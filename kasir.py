@@ -49,7 +49,10 @@ class CoffeeShopSans:
     # membuat konten
     def create_widgets(self):
         # header menu
-        tk.Label(self.root, text='Menu Barudak Ngopi', font=('Arial', 20, 'bold')).pack(pady=10)
+        tk.Label(self.root, text='Menu Barudak Ngopi', 
+        bg="#F5DEB3",
+        fg="#3D2B1F",
+        font=('Times New Roman', 20, 'bold')).pack(pady=10)
 
         # membuat notebook
         notebook =  ttk.Notebook(self.root)
@@ -66,9 +69,9 @@ class CoffeeShopSans:
         order_frame.pack(pady=5, padx=5, fill='both')
 
         # listbox pesanan
-        self.order_list = tk.Listbox(order_frame, height=8)
+        self.order_list = tk.Listbox(order_frame, height=8, bg="#EFDFBB")
         self.order_list.pack(padx=5, pady=5, fill='both')
-            
+
         # label total
         self.total_label = tk.Label(order_frame, text='Total: Rp. 0', font=('Arial', 12))
         self.total_label.pack(pady=5)
@@ -96,14 +99,14 @@ class CoffeeShopSans:
         self.pesanan.append((item, price))
         self.order_list.insert(tk.END, f'{item} - Rp. {price:,}')
         self.total += price
-        self.total_label.config(text=f'Total: Rp {self.total:,}')
+        self.total_label.config(text=f'Total: Rp {self.total:,}', font=('Times New Roman', 12, 'bold'), fg="#3D2B1F", bg="#F5DEB3")
 
     # fungsi menghapus orderan
     def clear_order(self):
         self.pesanan.clear()
         self.order_list.delete(0, tk.END)
         self.total = 0
-        self.total_label.config(text="Total: Rp 0")
+        self.total_label.config(text="Total: Rp 0", font=('Times New Roman', 12, 'bold'), fg="#3D2B1F")
 
     # fungsi checkout
     def checkout(self):
@@ -115,15 +118,16 @@ class CoffeeShopSans:
         layar_checout = tk.Toplevel(self.root)
         layar_checout.title("Checkout")
         layar_checout.geometry("300x200")
+        layar_checout.configure(bg="#F5DEB3")
         layar_checout.resizable(False, False)
 
         # form checkout / mengisi data nama untuk checkout
-        ttk.Label(layar_checout, text="Nama : ").pack(pady=5)
+        ttk.Label(layar_checout, text="Nama : ", background="#F5DEB3", foreground="#3D2B1F", font=('Times New Roman', 15, 'bold')).pack(pady=5)
         nama_pemesan = ttk.Entry(layar_checout)
         nama_pemesan.pack(pady=5)
 
         # melilih metode pembayaran
-        ttk.Label(layar_checout, text="Metode Pembayaran : ").pack(pady=5)
+        ttk.Label(layar_checout, text="Metode Pembayaran : ", background="#F5DEB3", foreground="#3D2B1F", font=('Times New Roman', 15, 'bold')).pack(pady=5)
         var_pembayaran = tk.StringVar()
         kombo_pembayaran = ttk.Combobox(layar_checout, textvariable=var_pembayaran, values=self.metode_pembayaran, state='readonly')
         kombo_pembayaran.pack(pady=5)
@@ -162,6 +166,7 @@ Pesanan berhasil mohon tunggu sebentar.
 
 def main():
     root = tk.Tk()
+    root.configure(bg="#F5DEB3")
     app = CoffeeShopSans(root)
     root.mainloop()
 
